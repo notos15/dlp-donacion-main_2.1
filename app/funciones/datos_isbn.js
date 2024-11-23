@@ -18,10 +18,12 @@ export const isbndatos = async (isbn) => {
       console.log(libro);
       
       if (libro) {
+        
         return {
           titulo: libro.title || "",
           autor: libro.authors?.[0]?.name || "",
-          imagen: libro.cover?.medium || ""
+          imagen: libro.cover?.medium || "",
+          
         };
       } else {
         return null;

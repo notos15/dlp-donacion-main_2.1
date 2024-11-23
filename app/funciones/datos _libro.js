@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cuadro from "@/app/funciones/ctexto.js";
 import CuadroTex from "@/app/funciones/ctexto_rellenado.js";
 import Libro from "@/app/formulario/libro.json";
+import {Base64} from "@/app/funciones/imagen.js";
 
 export function no_ISBN(){
     return(
@@ -39,7 +40,13 @@ export function no_ISBN(){
 };
 //en esta funcion se tendria que despues analizar si funciona  la libreria, si no tendria que ir a la funcion no_ISBN(), Aparte que se tendria que agregar a esta 
 //funcion que se vea la imagen del libro, donde se tendria que confirmar la imagen del libro o no 
-export function si_ISBN(titulo,autor){
+export function si_ISBN(titulo,autor,imagen){ 
+    
+    const a= Base64(imagen);
+    
+    console.log(a);
+    console.log(typeof a);
+    
     return(
         <div className="opacity-60">
             <div className='text-customBlue font-sans mb-4'> Asegurate que los datos del libro esten todos correctos</div>
@@ -53,7 +60,16 @@ export function si_ISBN(titulo,autor){
                 <input type="text" value={autor} readOnly 
                 class="appearance-none rounded border-4 border-customBlue bg-primary-gradient w-72 md:w-1/3 placeholder-customGray"/>
             </div>
-            
+            <img
+                src={`data:image/jpeg;base64,${a}`}  // Asegúrate de que el tipo de imagen (jpeg) sea el correcto.
+                alt="Imagen del libro"
+                className="w-auto md:max-w-full h-auto rounded-md"
+            />
+            <img 
+                    src={imagen}
+                    alt="Qué es un ISBN" 
+                    className="w-auto md:max-w-full h-auto rounded-md"
+                />
            
             {Libro.tes.map((pregunta, i) => (
                 <div className='precionar' key={i}>

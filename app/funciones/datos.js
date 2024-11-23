@@ -7,6 +7,7 @@ import Duda from "./duda.js";
 import { si_ISBN, no_ISBN ,ISBN_no_funciona} from "@/app/funciones/datos _libro.js";
 import { isbndatos } from "@/app/funciones/datos_isbn.js";
 
+
 export function persona() {
     const [opcionSeleccionadaPersona, setOpcionSeleccionadaPersona] = useState('');
     const handleOpcionPersonaChange = (e) => {
@@ -88,6 +89,7 @@ export function codigo() {
     // Estados para almacenar el título y autor
     const [titulo, setTitulo] = useState('');
     const [autor, setAutor] = useState('');
+    const [imagen, setImagen] = useState('');
     
     const [isDudaVisible, setDudaVisible] = useState(false);  // Añadido el estado para mostrar la duda
 
@@ -114,6 +116,8 @@ export function codigo() {
         if (datosLibro) {
             setTitulo(datosLibro.titulo);  // Rellena el título
             setAutor(datosLibro.autor);    // Rellena el autor
+            setImagen(datosLibro.imagen);
+            
         } else {
             // Si no se encuentran los datos, puedes manejar el error (por ejemplo, mostrando un mensaje)
             alert("No se encontró el libro con este ISBN.");
@@ -157,6 +161,8 @@ export function codigo() {
                 <div>
                     <div className='mb-6 opacity-60'>
                         <div className='text-white font-semibold text-xl'>ISBN:</div>
+                       
+       
                         <input 
                             type="text" 
                             name="codigo"
@@ -168,9 +174,9 @@ export function codigo() {
             )}
             {mostrarContenido && (
                <div>
-                   
-                   {opcionSeleccionadaCodigo === 'no' ? no_ISBN() :  (titulo!=null && autor!=null)?si_ISBN(titulo,autor):ISBN_no_funciona()}
+                   {opcionSeleccionadaCodigo === 'no' ? no_ISBN() :  (titulo!=null && autor!=null)?si_ISBN(titulo,autor,imagen):ISBN_no_funciona()}
                 </div>
+           
             )}
             {/* Si se rellenaron los datos, mostrar los campos de título y autor */}
             {/* Aun faltaria ver si cambia en tailwind */}
